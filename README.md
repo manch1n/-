@@ -35,6 +35,7 @@ encrypt     100000 bytes:        8973us   decrypt     100000 bytes:        9325u
 encrypt    1000000 bytes:       89448us   decrypt    1000000 bytes:       93488us   test success!   
 encrypt   10000000 bytes:      874612us   decrypt   10000000 bytes:      876191us   test success!   
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
+空格会被吃？
    
 参考：   
 《1》http://kns.cnki.net/KCMS/detail/detail.aspx?dbcode=CJFD&dbname=CJFDLAST2016&filename=JZGC201626113&uid=WEEvREcwSlJHSldRa1FhdkJkVG5heGJMd2lJaUcwUEF3Wi9GM2RycWp3dz0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4IQMovwHtwkF4VYPoHbKxJw!!&v=MzEyOTExVDNxVHJXTTFGckNVUkxPZVorZHBGeXpsV3IvT0x6Zk1iYkc0SDlmT3FZNUVaNFI4ZVgxTHV4WVM3RGg=
