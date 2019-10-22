@@ -8,23 +8,24 @@
 #include "hill.h"
 #include "playfair.h"
 #include "common.h"
+#include "des.h"
 
 using namespace std;
 using namespace std::chrono;
 using namespace info_secu;
-void testbase(Algobase& a) 
+void testbase(Algobase &a)
 {
 	for (int i = 10000; i <= 10000000; i *= 10)
 	{
 		auto testdata = ::createRandom(i);
-		vector<Algobase::DTYPE> vec(testdata); //in case that the default constructor to initial to zero 
-		auto start = system_clock::now();   //test encrypt
+		vector<Algobase::DTYPE> vec(testdata); //in case that the default constructor to initial to zero
+		auto start = system_clock::now();	  //test encrypt
 		a.encrypt(vec);
 		auto end = system_clock::now();
 		auto du = duration_cast<std::chrono::microseconds>(end - start);
-		std::cout << "encrypt "<<setw(10)<<i<<" bytes:" << setw(12) << right<< du.count() << "us   ";
+		std::cout << "encrypt " << setw(10) << i << " bytes:" << setw(12) << right << du.count() << "us   ";
 		start = system_clock::now();
-		a.decrypt(vec);									//test decrypt
+		a.decrypt(vec); //test decrypt
 		end = system_clock::now();
 		du = duration_cast<std::chrono::microseconds>(end - start);
 		std::cout << "decrypt " << setw(10) << i << " bytes:" << setw(12) << right << du.count() << "us   ";
@@ -46,7 +47,7 @@ void testbase(Algobase& a)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
 	Ceaser c;
 	std::cout << "Ceaser" << std::endl;
@@ -57,6 +58,9 @@ int main(int argc, char** argv)
 	Hill h;
 	std::cout << "Hill" << std::endl;
 	testbase(h);
+	std::cout << "Des" << std::endl;
+	Des d;
+	testbase(d);
 	std::getchar();
 	return 0;
 }
