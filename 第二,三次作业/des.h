@@ -37,6 +37,7 @@ public:
 	void encrypt(std::vector<DTYPE> &plain);
 	void decrypt(std::vector<DTYPE> &cipher);
 
+private:
 	void keyPermute(BITS64 &key);
 
 	void initShiftKeys(); //should be call afer keypermute
