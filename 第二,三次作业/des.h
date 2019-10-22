@@ -37,23 +37,23 @@ public:
 	void encrypt(std::vector<DTYPE> &plain);
 	void decrypt(std::vector<DTYPE> &cipher);
 
-private:
-	void keyPermute(BITS64 &key);
-
-	void initShiftKeys(); //should be call afer keypermute
-	void initPermute(BITS64 &data);
-	void invePermute(BITS64 &data);
-	void initPermuteBase(BITS64 &data, const size_t table[64]);
-
 	template <typename T>
-	inline TYPE64 *CAST64P(T e)
+	inline TYPE64* CAST64P(T e)
 	{
 		if (std::is_pointer<T>::value == false)
 		{
 			return nullptr;
 		}
-		return reinterpret_cast<TYPE64 *>(e);
+		return reinterpret_cast<TYPE64*>(e);
 	}
+
+private:
+	void keyPermute(BITS64 &key);
+
+	void initShiftKeys(); //should be call afer keypermute
+	std::function<void(BITS64&)> initPermute = std::bind(&Des::initPermuteBase,*this, std::placeholders::_1, _ipTable);
+	std::function<void(BITS64&)> invePermute = std::bind(&Des::initPermuteBase, *this, std::placeholders::_1, _ipInTable);
+	void initPermuteBase(BITS64 &data, const size_t table[64]);
 
 	inline void CYCLESHIFT(std::string &bs)
 	{
@@ -122,15 +122,10 @@ inline void Des::renewed(BITS32 &left, BITS32 &right, int round)
 	//left = rtmp;
 }
 
-inline void Des::initPermute(BITS64 &data)
-{
-	initPermuteBase(data, _ipTable);
-}
-
-inline void Des::invePermute(BITS64 &data)
-{
-	initPermuteBase(data, _ipInTable);
-}
+//inline void Des::initPermute(BITS64 &data)
+//{
+//	initPermuteBase(data, _ipTable);
+//}
 
 inline void Des::initPermuteBase(BITS64 &data, const size_t table[64])
 {
