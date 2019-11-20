@@ -86,11 +86,21 @@ Des::Des(BITS64 bs)
 
 void Des::encrypt(std::vector<DTYPE> &plain)
 {
-	int nleft = plain.size();
+	encrypt(plain.data(), plain.size());
+}
+
+void Des::decrypt(std::vector<DTYPE> &cipher)
+{
+	encrypt(cipher.data(), cipher.size());
+}
+
+void Des::encrypt(DTYPE *const underlying, std::size_t size)
+{
+	int nleft = size;
 	int ndone = 0;
 	while (nleft >= 4)
 	{
-		auto datapointer = CAST64P(plain.data() + ndone);
+		auto datapointer = CAST64P(underlying + ndone);
 		TYPE64 unit = *datapointer;
 		BITS64 l_r(unit);
 
@@ -119,13 +129,13 @@ void Des::encrypt(std::vector<DTYPE> &plain)
 	}
 }
 
-void Des::decrypt(std::vector<DTYPE> &cipher)
+void Des::decrypt(DTYPE *const underlying, std::size_t size)
 {
-	int nleft = cipher.size();
+	int nleft = size;
 	int ndone = 0;
 	while (nleft >= 4)
 	{
-		auto datapointer = CAST64P(cipher.data() + ndone);
+		auto datapointer = CAST64P(underlying + ndone);
 		TYPE64 unit = *datapointer;
 		BITS64 l_r(unit);
 
